@@ -15,7 +15,10 @@ public class FooBarQuixBatchProcessor implements ItemProcessor<Input, Transforme
     }
 
     @Override
-    public TransformedResult process(@NonNull Input input) {
+    public TransformedResult process(Input input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
         return new TransformedResult(input.number(), fooBarQuixService.transform(input.number()));
     }
 }
